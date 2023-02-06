@@ -30,7 +30,7 @@ function divide(firstNumber, secondNumber){
 
 // We take an operator and two numbers, then call the needed function
 
-function operate(operator, firstNumber, secondNumber){
+function operate(firstNumber, operator, secondNumber){
     if(operator == "+") {
         return add(firstNumber, secondNumber);
     } else if(operator == "-") {
@@ -45,19 +45,28 @@ function operate(operator, firstNumber, secondNumber){
 // event listeners and functionality of the display
 const display = document.querySelector(".display");
 
-function displayResult(){
-    display.textContent = result;
-    // falta la variable de result
-}
 
-const numbers = document.querySelectorAll(".numberButton")
 
-numbers.forEach(element => {
-    element.addEventListener("click", () => {
-        display.textContent = "9876543210"
+const numbers = document.querySelectorAll(".numberButton");
+numbers.forEach(number => {
+    number.addEventListener("click", () => {
+        display.textContent = number.value;
     })
 });
 
-const operators = document.querySelectorAll(".operatorButton")
+const operators = document.querySelectorAll(".operatorButton");
+operators.forEach(operator => {
+    operator.addEventListener("click", () => {
+        display.textContent = operator.value;
+    })
+})
 
-const equalClear = document.querySelectorAll(".extraButton")
+const equal = document.querySelector(".equalButton");
+equal.addEventListener("click", () => {
+    display.textContent = equal.value
+})
+
+const clear = document.querySelector(".clearButton");
+clear.addEventListener("click", () => {
+    display.textContent = result
+})
