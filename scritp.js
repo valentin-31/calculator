@@ -68,18 +68,24 @@ equal.addEventListener("click", () => {
 // when  is clicked call the operate function
 
 equal.addEventListener("click", () => {
-    operate(firstNumberArray.join(""), secondNumberArray.join(""), operatorArray);
+    operate(firstTermArray.join(""), secondTermArray.join(""), operatorArray);
 })
 
 const clear = document.querySelector(".clearButton");
+
+// clear all the arrays data
+
 clear.addEventListener("click", () => {
     display.textContent = "0"
+    firstTermArray.length = 0;
+    secondTermArray.length = 0;
+    operatorArray.length = 0;
 })
 
 // assignment arrays
 let operatorArray = []
-let firstNumberArray = []
-let secondNumberArray = []
+let firstTermArray = []
+let secondTermArray = []
 
 // regular expression for checking if the display data is a number
 let regExp = /\d+/g;
@@ -87,14 +93,15 @@ let regExp = /\d+/g;
 // get the number or operator in the display and store in an array
 function checkDisplay(){
     if(display.textContent.match(regExp) && operatorArray.length == 0){       // check if it is number and no operator has been assigned, if true goes to the first array
-        firstNumberArray.push(display.textContent);    
+        firstTermArray.push(display.textContent);    
     } else if (!display.textContent.match(regExp)) {    // if it isn´t must be an operator
         operatorArray.push(display.textContent);
     } else if(display.textContent.match(regExp) ) {  
-        secondNumberArray.push(display.textContent);   // if it is a number and an operator has been selected
+        secondTermArray.push(display.textContent);   // if it is a number and an operator has been selected
     }                                                  // the number goes to the second array
 }
 
 window.addEventListener("click",() => {
     checkDisplay();
 })
+   
