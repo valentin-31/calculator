@@ -1,47 +1,45 @@
-let operationNumbers = [];
-let operationSings = [];
-
 // Basic functions 
 
 function add(firstNumber, secondNumber){
     let sum = 0;
     sum = firstNumber + secondNumber;
 
-    return sum;
+    display.textContent = sum;
 }
 
 function subtract(firstNumber, secondNumber){
     let rest;
     rest = firstNumber - secondNumber;
     
-    return rest;
+    display.textContent = rest;
 }
 
 function multiply(firstNumber, secondNumber){
     let multi;
     multi = firstNumber * secondNumber;
 
-    return multi;
+    display.textContent = multi;
 }
 
 function divide(firstNumber, secondNumber){
     let division;
     division = firstNumber / secondNumber;
-
-    return division;
+    
+    display.textContent = division;
 }
 
 // We take an operator and two numbers, then call the needed function
 
-function operate(firstNumber, operator, secondNumber){
+function operate(firstNumber, secondNumber, operator){
+    
     if(operator == "+") {
-        return add(firstNumber, secondNumber);
+        return add(+firstNumber, +secondNumber);
     } else if(operator == "-") {
-        return subtract(firstNumber,secondNumber);
+        return subtract(+firstNumber, +secondNumber);
     } else if(operator == "*"){
-        return multiply(firstNumber,secondNumber);
+        return multiply(+firstNumber, +secondNumber);
     } else if(operator == "/"){
-        return divide(firstNumber,secondNumber);
+        return divide(+firstNumber, +secondNumber);
     }
 }
 
@@ -67,36 +65,36 @@ equal.addEventListener("click", () => {
     display.textContent = equal.value
 })
 
+// when  is clicked call the operate function
+
+equal.addEventListener("click", () => {
+    operate(firstNumberArray.join(""), secondNumberArray.join(""), operatorArray);
+})
+
 const clear = document.querySelector(".clearButton");
 clear.addEventListener("click", () => {
     display.textContent = "0"
 })
 
-// get the number or operator in the display and store in an array
+// assignment arrays
 let operatorArray = []
 let firstNumberArray = []
 let secondNumberArray = []
 
+// regular expression for checking if the display data is a number
+let regExp = /\d+/g;
+
+// get the number or operator in the display and store in an array
 function checkDisplay(){
     if(display.textContent.match(regExp) && operatorArray.length == 0){       // check if it is number and no operator has been assigned, if true goes to the first array
         firstNumberArray.push(display.textContent);    
     } else if (!display.textContent.match(regExp)) {    // if it isn´t must be an operator
         operatorArray.push(display.textContent);
     } else if(display.textContent.match(regExp) ) {  
-        secondNumberArray.push(display.textContent);   
-    }
+        secondNumberArray.push(display.textContent);   // if it is a number and an operator has been selected
+    }                                                  // the number goes to the second array
 }
 
 window.addEventListener("click",() => {
     checkDisplay();
-    numberFilter();
 })
-
-// Check the data from the previous function
-// let operationNumbers;
-// let operationSings;
-
-function numberFilter(){
-}
-
-let regExp = /\d+/g;
