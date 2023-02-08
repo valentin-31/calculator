@@ -1,3 +1,6 @@
+let operationNumbers = [];
+let operationSings = [];
+
 // Basic functions 
 
 function add(firstNumber, secondNumber){
@@ -45,8 +48,6 @@ function operate(firstNumber, operator, secondNumber){
 // event listeners and functionality of the display
 const display = document.querySelector(".display");
 
-
-
 const numbers = document.querySelectorAll(".numberButton");
 numbers.forEach(number => {
     number.addEventListener("click", () => {
@@ -68,5 +69,34 @@ equal.addEventListener("click", () => {
 
 const clear = document.querySelector(".clearButton");
 clear.addEventListener("click", () => {
-    display.textContent = result
+    display.textContent = "0"
 })
+
+// get the number or operator in the display and store in an array
+let operatorArray = []
+let firstNumberArray = []
+let secondNumberArray = []
+
+function checkDisplay(){
+    if(display.textContent.match(regExp) && operatorArray.length == 0){       // check if it is number and no operator has been assigned, if true goes to the first array
+        firstNumberArray.push(display.textContent);    
+    } else if (!display.textContent.match(regExp)) {    // if it isn´t must be an operator
+        operatorArray.push(display.textContent);
+    } else if(display.textContent.match(regExp) ) {  
+        secondNumberArray.push(display.textContent);   
+    }
+}
+
+window.addEventListener("click",() => {
+    checkDisplay();
+    numberFilter();
+})
+
+// Check the data from the previous function
+// let operationNumbers;
+// let operationSings;
+
+function numberFilter(){
+}
+
+let regExp = /\d+/g;
