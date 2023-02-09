@@ -1,7 +1,13 @@
-#mainContainer{
+/* #mainContainer{
     border: 2px solid green;
-}
+    
+    display: flex;
+} */
 
 .display{
-    border: 2px solid black;
+    border: 2px solid grey;
+} 
+
+#calculatorDiv{
+    border: 2px solid black
 }

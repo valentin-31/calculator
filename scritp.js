@@ -4,28 +4,28 @@ function add(firstNumber, secondNumber){
     let sum = 0;
     sum = firstNumber + secondNumber;
 
-    display.textContent = sum;
+    return sum;
 }
 
 function subtract(firstNumber, secondNumber){
     let rest;
     rest = firstNumber - secondNumber;
     
-    display.textContent = rest;
+    return rest;
 }
 
 function multiply(firstNumber, secondNumber){
     let multi;
     multi = firstNumber * secondNumber;
 
-    display.textContent = multi;
+    return multi;
 }
 
 function divide(firstNumber, secondNumber){
     let division;
     division = firstNumber / secondNumber;
     
-    display.textContent = division;
+    return division;
 }
 
 // We take an operator and two numbers, then call the needed function
@@ -46,30 +46,60 @@ function operate(firstNumber, secondNumber, operator){
 // event listeners and functionality of the display
 const display = document.querySelector(".display");
 
+// assignment arrays
+let displayArray = [];
+let operatorArray = [];
+let firstTermArray = [];
+let secondTermArray = [];
+let resultArray = [];
+
 const numbers = document.querySelectorAll(".numberButton");
 numbers.forEach(number => {
     number.addEventListener("click", () => {
-        display.textContent = number.value;
+        displayArray.push(number.value);
+        display.textContent = displayArray.join("");
     })
 });
 
 const operators = document.querySelectorAll(".operatorButton");
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
-        display.textContent = operator.value;
+        // check if the operatorArray is empty, if true means that no calculation had taken place
+        if(operatorArray.length == 0){
+            firstTermArray.push(...displayArray);
+            displayArray.length = 0;
+            operatorArray = operator.value
+            display.textContent = operatorArray;
+        }else if(operatorArray.length >= 1){
+            // do the current calculation 
+            secondTermArray.push(...displayArray);
+            resultArray = operate(firstTermArray.join(""), secondTermArray.join(""), operatorArray);
+            display.textContent = resultArray;
+
+            // clear previous values from the arrays
+            firstTermArray.length = 0;
+            secondTermArray.length = 0;
+            operatorArray.length = 0;
+
+            // the result of the previous operation is the new firstTerm
+            firstTermArray.push(resultArray);
+            displayArray.length = 0;
+            operatorArray = operator.value
+            display.textContent = operatorArray;
+        }
     })
 })
 
 const equal = document.querySelector(".equalButton");
 equal.addEventListener("click", () => {
-    display.textContent = equal.value
+    secondTermArray.push(...displayArray);
+    displayArray.length = 0;
+    resultArray = operate(firstTermArray.join(""), secondTermArray.join(""), operatorArray);
+    display.textContent = resultArray;
 })
 
 // when  is clicked call the operate function
 
-equal.addEventListener("click", () => {
-    operate(firstTermArray.join(""), secondTermArray.join(""), operatorArray);
-})
 
 const clear = document.querySelector(".clearButton");
 
@@ -80,28 +110,6 @@ clear.addEventListener("click", () => {
     firstTermArray.length = 0;
     secondTermArray.length = 0;
     operatorArray.length = 0;
+    displayArray.length = 0;
+    resultArray.length = 0;
 })
-
-// assignment arrays
-let operatorArray = []
-let firstTermArray = []
-let secondTermArray = []
-
-// regular expression for checking if the display data is a number
-let regExp = /\d+/g;
-
-// get the number or operator in the display and store in an array
-function checkDisplay(){
-    if(display.textContent.match(regExp) && operatorArray.length == 0){       // check if it is number and no operator has been assigned, if true goes to the first array
-        firstTermArray.push(display.textContent);    
-    } else if (!display.textContent.match(regExp)) {    // if it isn´t must be an operator
-        operatorArray.push(display.textContent);
-    } else if(display.textContent.match(regExp) ) {  
-        secondTermArray.push(display.textContent);   // if it is a number and an operator has been selected
-    }                                                  // the number goes to the second array
-}
-
-window.addEventListener("click",() => {
-    checkDisplay();
-})
-   
