@@ -64,16 +64,18 @@ numbers.forEach(number => {
 const operators = document.querySelectorAll(".operatorButton");
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
+        // check if the operatorArray is empty, if true means that no calculation had taken place
         if(operatorArray.length == 0){
             firstTermArray.push(...displayArray);
             displayArray.length = 0;
             operatorArray = operator.value
             display.textContent = operatorArray;
         }else if(operatorArray.length >= 1){
+            // do the current calculation 
             secondTermArray.push(...displayArray);
             resultArray = operate(firstTermArray.join(""), secondTermArray.join(""), operatorArray);
             display.textContent = resultArray;
-            
+
             // clear previous values from the arrays
             firstTermArray.length = 0;
             secondTermArray.length = 0;
@@ -111,6 +113,3 @@ clear.addEventListener("click", () => {
     displayArray.length = 0;
     resultArray.length = 0;
 })
-
-// regular expression for checking if the display data is a number
-let regExp = /\d+/g;
