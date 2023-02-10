@@ -6,7 +6,6 @@ body {
 #mainContainer{
     display: flex;
 
-
     height: 100vh;
     
     background-color: #73a2fb;
@@ -16,12 +15,12 @@ body {
     border: 1px solid #414143;
 
     margin: auto;
-    scale: 900%;
-    margin-top: 18%;
 
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
+    scale: 390%;
 }
 
 .body{    
@@ -40,7 +39,7 @@ body {
 } 
 
 button{
-    margin: 2px;
+    margin: 1px;
     width: 100%;
 
     background-color: #f7f7f7;
