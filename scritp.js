@@ -23,9 +23,13 @@ function multiply(firstNumber, secondNumber){
 
 function divide(firstNumber, secondNumber){
     let division;
-    division = firstNumber / secondNumber;
     
-    return division;
+    if(secondNumber == 0) {
+        return "Cant divide by zero :P"
+    } else {
+        division = firstNumber / secondNumber;
+        return division;
+    } 
 }
 
 // We take an operator and two numbers, then call the needed function
