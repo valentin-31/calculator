@@ -3,27 +3,23 @@
 function add(firstNumber, secondNumber){
     let sum = 0;
     sum = firstNumber + secondNumber;
-
     return sum;
 }
 
 function subtract(firstNumber, secondNumber){
     let rest;
-    rest = firstNumber - secondNumber;
-    
+    rest = firstNumber - secondNumber; 
     return rest;
 }
 
 function multiply(firstNumber, secondNumber){
     let multi;
     multi = firstNumber * secondNumber;
-
     return multi;
 }
 
 function divide(firstNumber, secondNumber){
     let division;
-    
     if(secondNumber == 0) {
         return "Cant divide by zero :P"
     } else {
@@ -35,7 +31,6 @@ function divide(firstNumber, secondNumber){
 // We take an operator and two numbers, then call the needed function
 
 function operate(firstNumber, secondNumber, operator){
-    
     if(operator == "+") {
         return add(+firstNumber, +secondNumber);
     } else if(operator == "-") {
@@ -56,6 +51,14 @@ let operatorArray = [];
 let firstTermArray = [];
 let secondTermArray = [];
 let resultArray = [];
+
+// Keyboard support
+const buttons = document.querySelectorAll('button');
+
+window.addEventListener('keydown', function(e){
+    const key = document.querySelector(`button[data-key='${e.keyCode}']`);
+    key.click();
+});
 
 const numbers = document.querySelectorAll(".numberButton");
 numbers.forEach(number => {
