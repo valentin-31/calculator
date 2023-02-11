@@ -1,5 +1,4 @@
 // Basic functions 
-
 function add(firstNumber, secondNumber){
     let sum = 0;
     sum = firstNumber + secondNumber;
@@ -29,7 +28,6 @@ function divide(firstNumber, secondNumber){
 }
 
 // We take an operator and two numbers, then call the needed function
-
 function operate(firstNumber, secondNumber, operator){
     if(operator == "+") {
         return add(+firstNumber, +secondNumber);
@@ -105,18 +103,14 @@ equal.addEventListener("click", () => {
     display.textContent = resultArray;
 })
 
-// when  is clicked call the operate function
-
-
 const clear = document.querySelector(".clearButton");
 
 // clear all the arrays data
-
 clear.addEventListener("click", () => {
     display.textContent = "0"
-    firstTermArray.length = 0;
-    secondTermArray.length = 0;
-    operatorArray.length = 0;
-    displayArray.length = 0;
-    resultArray.length = 0;
+    firstTermArray = [];
+    secondTermArray = [];
+    operatorArray = [];
+    displayArray = [];
+    resultArray = [];
 })
